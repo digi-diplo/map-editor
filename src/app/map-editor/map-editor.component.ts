@@ -1,5 +1,11 @@
 import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
-import { Area, TerrainType, AreaType } from '../models/Area';
+
+import { Observable } from 'rxjs';
+
+import { AreasQuery, Area, TerrainType, AreaType, AreasService } from '../state';
+import { PointMoveStart } from '../region/region.component';
+import { ThrowStmt } from '@angular/compiler';
+import { distanceBetween } from '../utils/coords.utils';
 
 interface Coords {
   x: number;
@@ -13,45 +19,101 @@ interface Size {
 
 @Component({
   selector: 'app-map-editor',
-  templateUrl: './map-editor.component.html',
+  template: `
+    <button mat-raised-button color="accent" (click)="addRegion()">Add region</button>
+    <button mat-raised-button color="accent" (click)="addArea()">Add area</button>
+    <button mat-raised-button color="accent" (click)="clearState()">Clear state</button>
+
+    <div class="app-map-container">
+      <app-area-details-editor *ngIf="activeArea$ | async" [area]="activeArea$ | async"></app-area-details-editor>
+      <svg #map (click)="onClick($event)" (mousemove)="movePoint($event)" (mouseup)="pointMoveEnd($event)" (wheel)="onWheel($event)" viewBox="0 0 500 250">
+        <ng-template ngFor let-area [ngForOf]="areas$ | async">
+          <svg:g app-area [area]="area" (removePoint)="removePoint($event)" (initPointMove)="pointMoveStart($event)"/>
+        </ng-template>
+      </svg>
+    </div>
+		`,
   styleUrls: ['./map-editor.component.scss']
 })
-export class MapEditorComponent implements OnInit {
-  area: Area = {
-    name: 'TestArea',
-    regions: [{ points: [] }],
-    terrain: TerrainType.Ground,
-    type: AreaType.None
-  };
-  currentRegion = 0;
-  viewBox: Size = { height: 250, width: 500 };
+export class MapEditorComponent {
+  areas$: Observable<Area[]> = this.areaQuery.selectAll();
+  activeArea$: Observable<Area> = this.areaQuery.selectActive();
 
+  viewBox: Size = { height: 250, width: 500 };
   @ViewChild('map')
   map: ElementRef<SVGElement>;
 
-  constructor() { }
+  movingPoint = false;
+  movingConfirmed = false;
+  pointMoveStartEvent: PointMoveStart;
 
-  ngOnInit() {
-  }
+  constructor(
+    private areaQuery: AreasQuery,
+    private areaService: AreasService
+  ) { }
 
   onClick(event: MouseEvent) {
-    this.area.regions[this.currentRegion].points.push(this.getCoords(event));
+    this.areaService.addPointToActiveRegion(
+      this.getCoordsRelativeToMap({ x: event.clientX, y: event.clientY })
+    );
+  }
+
+  clearState() {
+    this.areaService.resetState();
   }
 
   addRegion() {
-    this.area.regions.push({ points: [] });
-    this.currentRegion++;
+    // this.area.regions.push({ points: [] });
+    // this.currentRegion++;
+  }
+
+  removePoint(index: number) {
+    this.areaService.removePointToActiveRegion(index);
+  }
+
+  pointMoveStart(event: PointMoveStart) {
+    console.log('moving');
+    this.pointMoveStartEvent = event;
+    this.movingPoint = true;
+    this.movingConfirmed = false;
+  }
+
+  movePoint(event: MouseEvent) {
+    if (!this.movingPoint) { return; }
+    const newPos = this.getCoordsRelativeToMap({ x: event.clientX, y: event.clientY });
+
+    if (!this.movingConfirmed) {
+      const startPos = this.getCoordsRelativeToMap(this.pointMoveStartEvent.pos);
+      const distance = Math.abs(distanceBetween(newPos, startPos));
+      console.log(distance);
+      if (distance > 2) {
+        this.movingConfirmed = true;
+      }
+    } else {
+      this.areaService.movePointFromActiveRegion(this.pointMoveStartEvent.pointIndex, newPos);
+    }
+  }
+
+  pointMoveEnd(event: MouseEvent) {
+    if (!this.movingPoint) { return; }
+
+    this.movePoint(event);
+    this.movingPoint = false;
+    this.pointMoveStartEvent = null;
+  }
+
+  addArea() {
+    this.areaService.addDumyArea();
   }
 
   onWheel(event: Event) {
     console.log(event);
   }
 
-  private getCoords(event: MouseEvent): Coords {
-    const coords: Coords = { x: event.clientX, y: event.clientY };
-    const element = this.map.nativeElement; // FIXME: do not use the event target, it does not work if you click on a polygon
+  private getCoordsRelativeToMap(coords: Coords): Coords {
+    const element = this.map.nativeElement;
     const rect = element.getBoundingClientRect();
-    const elRelativeCoords = this.relativeToElement(coords, rect);
+    const elRelativeCoords = this.relativeToRect(coords, rect);
 
     return this.relativeToSvg(
       elRelativeCoords,
@@ -59,7 +121,7 @@ export class MapEditorComponent implements OnInit {
     );
   }
 
-  private relativeToElement(coords: Coords, rect: ClientRect): Coords {
+  private relativeToRect(coords: Coords, rect: ClientRect): Coords {
     return {
       x: coords.x - rect.left,
       y: coords.y - rect.top

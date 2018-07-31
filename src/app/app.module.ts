@@ -7,6 +7,8 @@ import { AppComponent } from './app.component';
 import { MapEditorComponent } from './map-editor/map-editor.component';
 import { AreaComponent } from './area/area.component';
 import { RegionComponent } from './region/region.component';
+import { HttpClientModule } from '@angular/common/http';
+import { AreaDetailsEditorComponent } from './area-details-editor/area-details-editor.component';
 
 const matModules = [
   MatToolbarModule,
@@ -14,16 +16,18 @@ const matModules = [
 ];
 
 @NgModule({
+  imports: [
+    BrowserModule,
+    HttpClientModule,
+    BrowserAnimationsModule,
+    ...matModules
+  ],
   declarations: [
     AppComponent,
     MapEditorComponent,
     AreaComponent,
-    RegionComponent
-  ],
-  imports: [
-    BrowserModule,
-    BrowserAnimationsModule,
-    ...matModules
+    RegionComponent,
+    AreaDetailsEditorComponent
   ],
   providers: [],
   bootstrap: [AppComponent]
