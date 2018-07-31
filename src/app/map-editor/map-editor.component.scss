@@ -6,22 +6,3 @@
   overflow: hidden;
 }
 
-.app-area {
-  @include mat-elevation-transition;
-  @include mat-elevation(0);
-  cursor: pointer;
-  fill: grey;
-  stroke: blue;
-  stroke-dasharray: 2px 4px;
-  stroke-width: 0.55px;
-  animation: dash 8s linear infinite;
-}
-
-@keyframes dash {
-  from {
-    stroke-dashoffset: 100;
-  }
-  to {
-    stroke-dashoffset: 0;
-  }
-}

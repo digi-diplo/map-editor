@@ -1,5 +1,6 @@
+<button mat-raised-button color="accent" (click)="addRegion()">Add region</button>
 <div class="app-map-container">
-  <svg (click)="onClick($event)" (wheel)="onWheel($event)" viewBox="0 0 500 250">
-    <svg:polygon class="app-area" [attr.points]="points"/>
+  <svg #map (click)="onClick($event)" (wheel)="onWheel($event)" viewBox="0 0 500 250">
+    <svg:g app-area [area]="area"/>
   </svg>
 </div>
