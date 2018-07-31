@@ -1,4 +1,5 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
+
 import { Area } from '../state';
 import { PointMoveStart } from '../region/region.component';
 

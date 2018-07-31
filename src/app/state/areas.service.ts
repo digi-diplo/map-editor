@@ -1,11 +1,11 @@
 import { Injectable } from '@angular/core';
-import { ID, push, remove, update } from '@datorama/akita';
+import { push, remove, update } from '@datorama/akita';
+
 import { AreasStore } from './areas.store';
 import { AreasDataService } from './areas-data.service';
 import { Area, TerrainType, AreaType, createArea } from './area.model';
 import { AreasQuery } from './areas.query';
 import { Coords } from '../models/Coords';
-import { registerContentQuery } from '@angular/core/src/render3/instructions';
 
 @Injectable({
   providedIn: 'root'

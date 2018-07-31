@@ -4,7 +4,6 @@ import { Observable } from 'rxjs';
 
 import { AreasQuery, Area, TerrainType, AreaType, AreasService } from '../state';
 import { PointMoveStart } from '../region/region.component';
-import { ThrowStmt } from '@angular/compiler';
 import { distanceBetween } from '../utils/coords.utils';
 
 interface Coords {
@@ -26,7 +25,12 @@ interface Size {
 
     <div class="app-map-container">
       <app-area-details-editor *ngIf="activeArea$ | async" [area]="activeArea$ | async"></app-area-details-editor>
-      <svg #map (click)="onClick($event)" (mousemove)="movePoint($event)" (mouseup)="pointMoveEnd($event)" (wheel)="onWheel($event)" viewBox="0 0 500 250">
+      <svg #map
+        (click)="onClick($event)"
+        (mousemove)="movePoint($event)"
+        (mouseup)="pointMoveEnd($event)"
+        (wheel)="onWheel($event)"
+        viewBox="0 0 500 250">
         <ng-template ngFor let-area [ngForOf]="areas$ | async">
           <svg:g app-area [area]="area" (removePoint)="removePoint($event)" (initPointMove)="pointMoveStart($event)"/>
         </ng-template>
@@ -72,7 +76,6 @@ export class MapEditorComponent {
   }
 
   pointMoveStart(event: PointMoveStart) {
-    console.log('moving');
     this.pointMoveStartEvent = event;
     this.movingPoint = true;
     this.movingConfirmed = false;
@@ -85,7 +88,6 @@ export class MapEditorComponent {
     if (!this.movingConfirmed) {
       const startPos = this.getCoordsRelativeToMap(this.pointMoveStartEvent.pos);
       const distance = Math.abs(distanceBetween(newPos, startPos));
-      console.log(distance);
       if (distance > 2) {
         this.movingConfirmed = true;
       }
