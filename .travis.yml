@@ -1,8 +1,23 @@
+sudo: required
 dist: trusty
+
+addons:
+  apt:
+    sources:
+      - google-chrome
+    packages:
+      - google-chrome-stable
+
 language: node_js
 node_js:
   - "8"
-addons:
-  chrome: stable
-before-install:
-  - google-chrome-stable --headless --disable-gpu http://localhost:9876
+
+before-script:
+  - yarn install
+  - export DISPLAY=:99.0
+  - sh -e /etc/init.d/xvfb start
+
+script:
+  - npm run lint
+  - npm run test
+  - npm run e2e
