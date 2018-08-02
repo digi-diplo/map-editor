@@ -5,7 +5,7 @@
     "ng": "ng",
     "start": "ng serve",
     "build": "ng build",
-    "build:gh-pages": "ng build --prod --output-path docs --base-href map-editor && cp ./docs/index.html ./docs/404.html",
+    "build:gh-pages": "ng build --prod --base-href map-editor && cp ./dist/client/index.html ./dist/client/404.html",
     "test": "ng test",
     "lint": "ng lint",
     "e2e": "ng e2e"
