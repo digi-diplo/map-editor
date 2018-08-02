@@ -18,3 +18,13 @@ script:
   - yarn lint
   - yarn test --watch false
   - yarn e2e
+  - yarn build:gh-pages
+
+deploy:
+  provider: pages
+  skip-cleanup: true
+  keep-history: true
+  github-token: $GITHUB_TOKEN
+  local-dir: ./docs
+  on:
+    branch: master
