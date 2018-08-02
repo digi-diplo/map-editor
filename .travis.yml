@@ -4,3 +4,5 @@ node_js:
   - "8"
 addons:
   chrome: stable
+before-install:
+  - google-chrome-stable --headless --disable-gpu http://localhost:9876
