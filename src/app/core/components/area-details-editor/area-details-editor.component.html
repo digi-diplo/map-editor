@@ -1,0 +1,5 @@
+<div>
+  <mat-form-field floatLabel="never"><input matInput type="text" placeholder="Area name"></mat-form-field>
+  <mat-select><mat-option *ngFor="let type of terrainTypes | keys" [value]="type">{{type}}</mat-option></mat-select>
+  <mat-select><mat-option *ngFor="let type of areaTypes | keys" [value]="type">{{type}}</mat-option></mat-select>
+</div>

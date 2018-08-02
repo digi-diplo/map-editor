@@ -1,6 +1,9 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { AreaDetailsEditorComponent } from './area-details-editor.component';
+import { MatFormFieldModule, MatInputModule, MatSelectModule } from '../../../../../node_modules/@angular/material';
+import { KeysPipe } from '../../pipes/keys.pipe';
+import { BrowserAnimationsModule } from '../../../../../node_modules/@angular/platform-browser/animations';
 
 describe('AreaDetailsEditorComponent', () => {
   let component: AreaDetailsEditorComponent;
@@ -8,7 +11,13 @@ describe('AreaDetailsEditorComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ AreaDetailsEditorComponent ]
+      declarations: [ AreaDetailsEditorComponent, KeysPipe ],
+      imports: [
+        BrowserAnimationsModule,
+        MatFormFieldModule,
+        MatInputModule,
+        MatSelectModule
+      ]
     })
     .compileComponents();
   }));

@@ -1,0 +1,19 @@
+@import '~@angular/material/theming';
+@import '../app/core/components/side-toolbar/side-toolbar.component.theme';
+@import '../app/core/components/area-details-editor/area-details-editor.component.theme';
+
+@include mat-core();
+
+$app-primary: mat-palette($mat-blue-grey, 700);
+$app-accent : mat-palette($mat-green, A400, A100, A400);
+$app-warn : mat-palette($mat-red);
+
+$app-dark-theme: mat-dark-theme($app-primary, $app-accent, $app-warn);
+
+@mixin app-mat-theme($theme) {
+  @include side-toolbar-theme($theme);
+  @include area-details-editor-theme($theme);
+}
+
+@include angular-material-theme($app-dark-theme);
+@include app-mat-theme($app-dark-theme);

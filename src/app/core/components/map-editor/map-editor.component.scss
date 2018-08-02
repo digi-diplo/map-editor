@@ -1,0 +1,21 @@
+@import '~@angular/material/theming';
+:host {
+  display: grid;
+  grid-template-areas: "entity-toolbar entity-toolbar" "sidebar map";
+  grid-template-columns: 48px auto;
+  grid-template-rows: 32px auto;
+}
+
+.app-map-container {
+  @include mat-elevation(4);
+  overflow: hidden;
+  grid-area: map;
+}
+
+.entity-toolbar {
+  grid-area: entity-toolbar;
+}
+
+.sidebar {
+  grid-area: sidebar;
+}

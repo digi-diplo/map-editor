@@ -1,0 +1,13 @@
+@mixin side-toolbar-theme($theme) {
+  $primary: map-get($theme, primary);
+  $accent: map-get($theme, accent);
+  $foreground: map-get($theme, foreground);
+
+  app-side-toolbar {
+    background-color: mat-color($primary);
+
+    .mat-icon-button {
+      color: mat-color($foreground, text);
+    }
+  }
+}

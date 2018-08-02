@@ -1,7 +1,8 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 
-import { Area } from '../state';
 import { PointMoveStart } from '../region/region.component';
+
+import { Area } from '../../state';
 
 @Component({
   // tslint:disable-next-line:component-selector
@@ -15,14 +16,8 @@ import { PointMoveStart } from '../region/region.component';
 
   `]
 })
-export class AreaComponent implements OnInit {
+export class AreaComponent {
   @Input() area: Area;
   @Output() removePoint = new EventEmitter<number>();
   @Output() initPointMove = new EventEmitter<PointMoveStart>();
-
-  constructor() { }
-
-  ngOnInit() {
-  }
-
 }

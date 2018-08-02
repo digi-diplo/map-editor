@@ -1,0 +1,18 @@
+:host {
+  display: grid;
+  height: 100vh;
+  width: 100vw;
+  grid-template-rows: min-content auto;
+  grid-template-areas: "app-top-toolbar" "app-map-editor";
+}
+
+.app-top-toolbar {
+  grid-area: app-top-toolbar;
+  height: 32px;
+  font-weight: normal;
+  font-size: 16px;
+}
+
+.app-map-editor {
+  grid-area: app-map-editor;
+}

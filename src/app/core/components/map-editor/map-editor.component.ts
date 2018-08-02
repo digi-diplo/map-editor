@@ -2,9 +2,9 @@ import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
 
 import { Observable } from 'rxjs';
 
-import { AreasQuery, Area, TerrainType, AreaType, AreasService } from '../state';
 import { PointMoveStart } from '../region/region.component';
-import { distanceBetween } from '../utils/coords.utils';
+import { Area, AreasQuery, AreasService } from '../../state';
+import { distanceBetween } from '../../../models/Coords';
 
 interface Coords {
   x: number;
@@ -18,13 +18,13 @@ interface Size {
 
 @Component({
   selector: 'app-map-editor',
+  // <button mat-raised-button color="accent" (click)="addRegion()">Add region</button>
+  // <button mat-raised-button color="accent" (click)="addArea()">Add area</button>
+  // <button mat-raised-button color="accent" (click)="clearState()">Clear state</button>
   template: `
-    <button mat-raised-button color="accent" (click)="addRegion()">Add region</button>
-    <button mat-raised-button color="accent" (click)="addArea()">Add area</button>
-    <button mat-raised-button color="accent" (click)="clearState()">Clear state</button>
-
+    <app-area-details-editor class="entity-toolbar" *ngIf="activeArea$ | async" [area]="activeArea$ | async"></app-area-details-editor>
+    <app-side-toolbar class="sidebar"></app-side-toolbar>
     <div class="app-map-container">
-      <app-area-details-editor *ngIf="activeArea$ | async" [area]="activeArea$ | async"></app-area-details-editor>
       <svg #map
         (click)="onClick($event)"
         (mousemove)="movePoint($event)"

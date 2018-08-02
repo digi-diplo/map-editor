@@ -1,5 +1,7 @@
-import { Region } from '../models/Region';
 import { ID } from '@datorama/akita';
+
+import { Region } from '../../models/Region';
+import { Coords } from '../../models/Coords';
 
 export enum AreaType {
   Empty = 'Empty',
@@ -14,7 +16,8 @@ export enum TerrainType {
 
 export interface Area {
   id: ID;
-  regions: Region[];
+  regions?: Region[];
+  boundary: Coords[];
   name: string;
   type: AreaType;
   terrain: TerrainType;

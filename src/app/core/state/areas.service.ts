@@ -1,11 +1,10 @@
 import { Injectable } from '@angular/core';
+
 import { push, remove, update } from '@datorama/akita';
 
 import { AreasStore } from './areas.store';
-import { AreasDataService } from './areas-data.service';
-import { Area, TerrainType, AreaType, createArea } from './area.model';
-import { AreasQuery } from './areas.query';
-import { Coords } from '../models/Coords';
+import { Area, createArea } from './area.model';
+import { Coords } from '../../models/Coords';
 
 @Injectable({
   providedIn: 'root'
@@ -13,16 +12,8 @@ import { Coords } from '../models/Coords';
 export class AreasService {
 
   constructor(
-    private areasStore: AreasStore,
-    private areasDataService: AreasDataService,
-    private areasQuery: AreasQuery
+    private areasStore: AreasStore
   ) { }
-
-  get() {
-    // this.areasDataService.get().subscribe((entities: ServerResponse) => {
-    // this.areasStore.set(entities);
-    // });
-  }
 
   resetState() {
     this.areasStore.set([]);
