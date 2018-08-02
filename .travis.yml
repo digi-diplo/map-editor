@@ -25,6 +25,6 @@ deploy:
   skip-cleanup: true
   keep-history: true
   github-token: $GITHUB_TOKEN
-  local-dir: ./docs
+  local-dir: ./dist/client
   on:
     branch: master
