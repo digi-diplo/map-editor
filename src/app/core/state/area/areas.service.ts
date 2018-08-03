@@ -1,19 +1,33 @@
 import { Injectable } from '@angular/core';
 
-import { remove, update } from '@datorama/akita';
+import { remove, update, ID } from '@datorama/akita';
 
 import { AreasStore } from './areas.store';
 import { Area, createArea } from './area.model';
 import { Coords } from '../../../models/coords';
+import { CursorQuery } from '../cursor/cursor.query';
+import { CursorService } from '../cursor/cursor.service';
 
 @Injectable({
   providedIn: 'root'
 })
 export class AreasService {
+  cursorAddingPoints: boolean;
 
   constructor(
-    private areasStore: AreasStore
-  ) { }
+    private areasStore: AreasStore,
+    cursorQuery: CursorQuery
+  ) {
+    cursorQuery.addingPoints().subscribe(b => this.cursorAddingPoints = b);
+  }
+
+  selectArea(areaID: ID) {
+    this.areasStore.setActive(areaID);
+  }
+
+  resetActive() {
+    this.areasStore.setActive(null);
+  }
 
   resetState() {
     this.areasStore.set([]);
@@ -30,14 +44,16 @@ export class AreasService {
   }
 
   addPointToActiveArea(point: Coords) {
-    console.log('Adding point');
-    this.areasStore.updateActive(area => ({
-      ...area,
-      boundaries: [
-        ...area.boundaries,
-        point
-      ]
-    }));
+    if (this.cursorAddingPoints) {
+      console.log('Adding point');
+      this.areasStore.updateActive(area => ({
+        ...area,
+        boundaries: [
+          ...area.boundaries,
+          point
+        ]
+      }));
+    }
   }
 
   removePointToActiveRegion(index: number) {

@@ -1,7 +1,7 @@
 import { Component, Input, Output, EventEmitter } from '@angular/core';
 
 import { PointMoveStart } from '../region/region.component';
-import { Area } from '../../state';
+import { Area, CursorQuery } from '../../state';
 
 @Component({
   // tslint:disable-next-line:component-selector
@@ -10,6 +10,8 @@ import { Area } from '../../state';
     <svg:g app-region
       [active]="active"
       [points]="area.boundaries"
+      [ngClass]="{'pointer': cursorIsSelect}"
+      (click)="emitSelect($event)"
       (removePoint)="removePoint.emit($event)"
       (initPointMove)="initPointMove.emit($event)"/>
     <ng-template ngFor let-region [ngForOf]="area.regions">
@@ -17,7 +19,9 @@ import { Area } from '../../state';
     </ng-template>
   `,
   styles: [`
-
+    .pointer {
+      cursor: pointer;
+    }
   `]
 })
 export class AreaComponent {
@@ -25,4 +29,19 @@ export class AreaComponent {
   @Input() active = false;
   @Output() removePoint = new EventEmitter<number>();
   @Output() initPointMove = new EventEmitter<PointMoveStart>();
+  @Output() select = new EventEmitter<void>();
+
+  cursorIsSelect = false;
+  constructor(
+    private cursorQuery: CursorQuery
+  ) {
+    this.cursorQuery.selecting().subscribe(b => this.cursorIsSelect = b);
+  }
+
+  emitSelect(event: MouseEvent) {
+    if (this.cursorIsSelect) {
+      event.preventDefault();
+      this.select.emit();
+    }
+  }
 }

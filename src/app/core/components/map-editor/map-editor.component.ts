@@ -1,10 +1,11 @@
-import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
+import { Component, OnInit, ViewChild, ElementRef, HostListener } from '@angular/core';
 
 import { Observable } from 'rxjs';
 
 import { PointMoveStart } from '../region/region.component';
 import { Area, AreasQuery, AreasService, CursorService } from '../../state';
 import { distanceBetween } from '../../../models';
+import { ID } from '@datorama/akita';
 
 interface Coords {
   x: number;
@@ -29,9 +30,10 @@ interface Size {
         (wheel)="onWheel($event)"
         viewBox="0 0 500 250">
         <ng-template ngFor let-area [ngForOf]="areas$ | async">
-          <svg:g app-area
+        <svg:g app-area
             [active]="area === (activeArea$ | async)"
             [area]="area"
+            (select)="selectArea(area.id)"
             (removePoint)="removePoint($event)"
             (initPointMove)="pointMoveStart($event)"/>
         </ng-template>
@@ -64,6 +66,11 @@ export class MapEditorComponent {
     );
   }
 
+  selectArea(areaID: ID) {
+    this.areaService.selectArea(areaID);
+    this.cursorService.setAddingPoint();
+  }
+
   clearState() {
     this.areaService.resetState();
   }
@@ -91,6 +98,14 @@ export class MapEditorComponent {
       }
     } else {
       this.areaService.movePointFromActiveRegion(this.pointMoveStartEvent.pointIndex, newPos);
+    }
+  }
+
+  @HostListener('document:keydown', ['$event'])
+  handleKeyboardEvent(event: KeyboardEvent) {
+    if (event.key === 'Escape') {
+      this.cursorService.setSelect();
+      this.areaService.resetActive();
     }
   }
 
