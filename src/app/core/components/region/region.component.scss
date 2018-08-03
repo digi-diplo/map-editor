@@ -3,7 +3,7 @@
 .app-area {
   @include mat-elevation-transition;
   @include mat-elevation(0);
-  fill: grey;
+  fill: rgba(128, 128, 128, 0.336);
   stroke: blue;
   stroke-dasharray: 2px 4px;
   stroke-width: 0.55px;

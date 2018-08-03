@@ -25,7 +25,7 @@ interface Size {
     <app-area-details-editor class="entity-toolbar" *ngIf="activeArea$ | async" [area]="activeArea$ | async"></app-area-details-editor>
     <app-side-toolbar class="sidebar"></app-side-toolbar>
     <div class="app-map-container">
-      <svg #map
+      <svg #map [ngClass]="{'crosshair': activeArea$ | async}"
         (click)="onClick($event)"
         (mousemove)="movePoint($event)"
         (mouseup)="pointMoveEnd($event)"
