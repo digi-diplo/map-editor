@@ -17,7 +17,7 @@ export enum TerrainType {
 export interface Area {
   id: ID;
   regions?: Region[];
-  boundary: Coords[];
+  boundaries: Coords[];
   name: string;
   type: AreaType;
   terrain: TerrainType;
@@ -31,6 +31,7 @@ export function createArea({
   id = Math.random(),
   name = 'New area',
   regions = [],
+  boundaries = [],
   terrain = TerrainType.Ground,
   type = AreaType.Empty
 }: Partial<Area>) {
@@ -39,6 +40,7 @@ export function createArea({
     name,
     regions,
     terrain,
+    boundaries,
     type
   } as Area;
 }

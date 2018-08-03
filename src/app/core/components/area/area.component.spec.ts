@@ -18,7 +18,7 @@ describe('AreaComponent', () => {
   beforeEach(() => {
     fixture = TestBed.createComponent(AreaComponent);
     component = fixture.componentInstance;
-    component.area = { name: 'Test area', terrain: TerrainType.Ground, type: AreaType.Arsenal, boundary: [], id: 1, regions: [] };
+    component.area = { name: 'Test area', terrain: TerrainType.Ground, type: AreaType.Arsenal, boundaries: [], id: 1, regions: [] };
     fixture.detectChanges();
   });
 

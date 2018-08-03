@@ -6,19 +6,15 @@ import { AreasService } from '../../state';
   templateUrl: './side-toolbar.component.html',
   styleUrls: ['./side-toolbar.component.scss']
 })
-export class SideToolbarComponent implements OnInit {
+export class SideToolbarComponent {
 
   constructor(
     private areaService: AreasService
   ) { }
-
-  ngOnInit() {
-  }
 
   addArea() {
     // Set cursor
     // Second click create new area
     this.areaService.addDumyArea();
   }
-
 }

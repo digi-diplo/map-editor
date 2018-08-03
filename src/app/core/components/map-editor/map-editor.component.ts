@@ -57,18 +57,13 @@ export class MapEditorComponent {
   ) { }
 
   onClick(event: MouseEvent) {
-    this.areaService.addPointToActiveRegion(
+    this.areaService.addPointToActiveArea(
       this.getCoordsRelativeToMap({ x: event.clientX, y: event.clientY })
     );
   }
 
   clearState() {
     this.areaService.resetState();
-  }
-
-  addRegion() {
-    // this.area.regions.push({ points: [] });
-    // this.currentRegion++;
   }
 
   removePoint(index: number) {
