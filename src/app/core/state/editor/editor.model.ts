@@ -5,6 +5,6 @@ export enum CursorActions {
   AddingPoint = 'AddingPoint'
 }
 
-export interface CursorState {
+export interface EditorState {
   state: CursorActions;
 }

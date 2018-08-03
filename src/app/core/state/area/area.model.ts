@@ -1,5 +1,5 @@
 import { ID } from '@datorama/akita';
-import { Region, Coords } from 'src/app/models';
+import { Region, Coords } from '../../../models';
 
 export enum AreaType {
   Empty = 'Empty',

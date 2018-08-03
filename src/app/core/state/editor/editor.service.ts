@@ -1,14 +1,14 @@
 import { Injectable } from '@angular/core';
 
-import { CursorStore } from './cursor.store';
-import { CursorActions } from './cursor.model';
+import { EditorStore } from './editor.store';
+import { CursorActions } from './editor.model';
 
 @Injectable({
   providedIn: 'root'
 })
-export class CursorService {
+export class EditorService {
   constructor(
-    private store: CursorStore
+    private store: EditorStore
   ) { }
 
   setGrabbing() {

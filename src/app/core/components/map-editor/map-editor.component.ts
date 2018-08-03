@@ -1,11 +1,11 @@
 import { Component, ViewChild, ElementRef, HostListener } from '@angular/core';
+import { ID } from '@datorama/akita';
 
 import { Observable } from 'rxjs';
 
 import { PointMoveStart } from '../region/region.component';
-import { Area, AreasQuery, AreasService, CursorService } from '../../state';
+import { Area, AreasQuery, AreasService, EditorService } from 'src/app/core/state';
 import { distanceBetween, Coords } from 'src/app/models';
-import { ID } from '@datorama/akita';
 
 interface Size {
   height: number;
@@ -22,6 +22,7 @@ export class MapEditorComponent {
   activeArea$: Observable<Area> = this.areaQuery.selectActive();
 
   viewBox: Size = { height: 250, width: 500 };
+
   @ViewChild('map')
   map: ElementRef<SVGElement>;
 
@@ -32,7 +33,7 @@ export class MapEditorComponent {
   constructor(
     private areaQuery: AreasQuery,
     private areaService: AreasService,
-    private cursorService: CursorService
+    private cursorService: EditorService
   ) { }
 
   onClick(event: MouseEvent) {

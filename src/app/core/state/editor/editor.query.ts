@@ -3,14 +3,14 @@ import { Query } from '@datorama/akita';
 
 import { Observable } from 'rxjs';
 
-import { CursorState, CursorActions } from './cursor.model';
-import { CursorStore } from './cursor.store';
+import { EditorState, CursorActions } from './editor.model';
+import { EditorStore } from './editor.store';
 
 @Injectable({
   providedIn: 'root'
 })
-export class CursorQuery extends Query<CursorState> {
-  constructor(protected store: CursorStore) {
+export class EditorQuery extends Query<EditorState> {
+  constructor(protected store: EditorStore) {
     super(store);
   }
 

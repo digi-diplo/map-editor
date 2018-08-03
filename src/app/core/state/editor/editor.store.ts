@@ -1,9 +1,9 @@
 import { Injectable } from '@angular/core';
 import { StoreConfig, Store } from '@datorama/akita';
 
-import { CursorState, CursorActions } from './cursor.model';
+import { EditorState, CursorActions } from './editor.model';
 
-const initialState: CursorState = {
+const initialState: EditorState = {
   state: CursorActions.Select
 };
 
@@ -13,7 +13,7 @@ const initialState: CursorState = {
 @StoreConfig({
   name: 'cursor'
 })
-export class CursorStore extends Store<CursorState> {
+export class EditorStore extends Store<EditorState> {
   constructor() {
     super(initialState);
   }

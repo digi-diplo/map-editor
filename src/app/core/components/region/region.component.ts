@@ -1,7 +1,8 @@
 import { Component, Input, Output, EventEmitter } from '@angular/core';
-import { Coords } from 'src/app/models';
 import { Observable } from 'rxjs';
-import { CursorQuery } from '../../state/cursor/cursor.query';
+
+import { Coords } from 'src/app/models';
+import { EditorQuery } from 'src/app/core/state';
 
 export interface PointMoveStart {
   pointIndex: number;
@@ -37,8 +38,8 @@ export class RegionComponent {
 
   cursorGrabbing: Observable<boolean>;
 
-  constructor(cursorQuery: CursorQuery) {
-    this.cursorGrabbing = cursorQuery.grabbing();
+  constructor(editorQuery: EditorQuery) {
+    this.cursorGrabbing = editorQuery.grabbing();
   }
 
   get svgPoints(): string {

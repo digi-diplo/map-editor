@@ -1,12 +1,12 @@
 import { Injectable } from '@angular/core';
-
 import { remove, update, ID } from '@datorama/akita';
+
+
+import { Coords } from 'src/app/models';
+import { EditorQuery } from '../editor/editor.query';
 
 import { AreasStore } from './areas.store';
 import { Area, createArea } from './area.model';
-import { Coords } from '../../../models/coords';
-import { CursorQuery } from '../cursor/cursor.query';
-import { CursorService } from '../cursor/cursor.service';
 
 @Injectable({
   providedIn: 'root'
@@ -16,9 +16,9 @@ export class AreasService {
 
   constructor(
     private areasStore: AreasStore,
-    cursorQuery: CursorQuery
+    editorQuery: EditorQuery
   ) {
-    cursorQuery.addingPoints().subscribe(b => this.cursorAddingPoints = b);
+    editorQuery.addingPoints().subscribe(b => this.cursorAddingPoints = b);
   }
 
   selectArea(areaID: ID) {

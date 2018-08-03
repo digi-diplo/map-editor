@@ -3,7 +3,7 @@ export * from './area/areas.store';
 export * from './area/areas.service';
 export * from './area/area.model';
 
-export * from './cursor/cursor.model';
-export * from './cursor/cursor.query';
-export * from './cursor/cursor.service';
-export * from './cursor/cursor.store';
+export * from './editor/editor.model';
+export * from './editor/editor.query';
+export * from './editor/editor.service';
+export * from './editor/editor.store';

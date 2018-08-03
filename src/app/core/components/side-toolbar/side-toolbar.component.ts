@@ -1,6 +1,7 @@
 import { Component, OnDestroy } from '@angular/core';
-import { AreasService } from '../../state';
 import { MatSnackBar } from '@angular/material';
+
+import { AreasService } from 'src/app/core/state';
 import { Subscription } from 'rxjs';
 
 @Component({
