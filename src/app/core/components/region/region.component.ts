@@ -1,5 +1,5 @@
 import { Component, Input, Output, EventEmitter } from '@angular/core';
-import { Coords } from '../../../models/Coords';
+import { Coords } from '../../../models/coords';
 
 export interface PointMoveStart {
   pointIndex: number;

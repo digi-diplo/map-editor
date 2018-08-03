@@ -1,9 +1,9 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { MatFormFieldModule, MatInputModule, MatSelectModule } from '@angular/material';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 import { AreaDetailsEditorComponent } from './area-details-editor.component';
-import { MatFormFieldModule, MatInputModule, MatSelectModule } from '../../../../../node_modules/@angular/material';
 import { KeysPipe } from '../../pipes/keys.pipe';
-import { BrowserAnimationsModule } from '../../../../../node_modules/@angular/platform-browser/animations';
 
 describe('AreaDetailsEditorComponent', () => {
   let component: AreaDetailsEditorComponent;

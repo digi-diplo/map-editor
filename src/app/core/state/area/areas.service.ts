@@ -4,7 +4,7 @@ import { remove, update } from '@datorama/akita';
 
 import { AreasStore } from './areas.store';
 import { Area, createArea } from './area.model';
-import { Coords } from '../../models/Coords';
+import { Coords } from '../../../models/coords';
 
 @Injectable({
   providedIn: 'root'

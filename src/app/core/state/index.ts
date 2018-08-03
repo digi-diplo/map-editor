@@ -1,5 +1,5 @@
-export * from './areas.query';
-export * from './areas.store';
-export * from './areas.service';
-export * from './area.model';
+export * from './area/areas.query';
+export * from './area/areas.store';
+export * from './area/areas.service';
+export * from './area/area.model';
 

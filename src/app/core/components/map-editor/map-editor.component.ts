@@ -4,7 +4,7 @@ import { Observable } from 'rxjs';
 
 import { PointMoveStart } from '../region/region.component';
 import { Area, AreasQuery, AreasService } from '../../state';
-import { distanceBetween } from '../../../models/Coords';
+import { distanceBetween } from '../../../models/coords';
 
 interface Coords {
   x: number;
@@ -100,6 +100,7 @@ export class MapEditorComponent {
 
     this.movePoint(event);
     this.movingPoint = false;
+    this.movingConfirmed = false;
     this.pointMoveStartEvent = null;
   }
 

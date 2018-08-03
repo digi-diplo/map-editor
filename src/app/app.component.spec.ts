@@ -1,8 +1,9 @@
 import { TestBed, async } from '@angular/core/testing';
+import { MatToolbarModule } from '@angular/material';
+
 import { AppComponent } from './app.component';
-import { MatToolbarModule } from '../../node_modules/@angular/material';
-import { MapEditorComponent } from './core/components/map-editor/map-editor.component';
 import { CoreModule } from './core/core.module';
+
 describe('AppComponent', () => {
   beforeEach(async(() => {
     TestBed.configureTestingModule({
