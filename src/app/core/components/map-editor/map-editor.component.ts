@@ -4,7 +4,7 @@ import { Observable } from 'rxjs';
 
 import { PointMoveStart } from '../region/region.component';
 import { Area, AreasQuery, AreasService, CursorService } from '../../state';
-import { distanceBetween } from '../../../models/coords';
+import { distanceBetween } from '../../../models';
 
 interface Coords {
   x: number;
@@ -18,9 +18,6 @@ interface Size {
 
 @Component({
   selector: 'app-map-editor',
-  // <button mat-raised-button color="accent" (click)="addRegion()">Add region</button>
-  // <button mat-raised-button color="accent" (click)="addArea()">Add area</button>
-  // <button mat-raised-button color="accent" (click)="clearState()">Clear state</button>
   template: `
     <app-area-details-editor class="entity-toolbar" *ngIf="activeArea$ | async" [area]="activeArea$ | async"></app-area-details-editor>
     <app-side-toolbar class="sidebar"></app-side-toolbar>

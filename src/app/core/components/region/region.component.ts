@@ -1,6 +1,6 @@
 import { Component, Input, Output, EventEmitter } from '@angular/core';
-import { Coords } from '../../../models/coords';
-import { Observable } from '../../../../../node_modules/rxjs';
+import { Coords } from 'src/app/models';
+import { Observable } from 'rxjs';
 import { CursorQuery } from '../../state/cursor/cursor.query';
 
 export interface PointMoveStart {
