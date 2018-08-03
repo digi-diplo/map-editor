@@ -10,9 +10,9 @@ export interface PointMoveStart {
   // tslint:disable-next-line:component-selector
   selector: '[app-region]',
   template: `
-      <svg:polygon class="app-area" [attr.points]="svgPoints"/>
+      <svg:polygon class="app-area" [ngClass]="{'active': active}" [attr.points]="svgPoints"/>
       <ng-template *ngIf="editing" ngFor let-i="index" let-point [ngForOf]="points">
-        <svg:circle (mousedown)="initMove($event, i)" (contextmenu)="deletePoint($event, i)"
+        <svg:circle *ngIf="active" (mousedown)="initMove($event, i)" (contextmenu)="deletePoint($event, i)"
           class="app-drag-circle"
           [attr.cx]="point.x"
           [attr.cy]="point.y"
@@ -25,6 +25,7 @@ export interface PointMoveStart {
 export class RegionComponent {
   @Input() points: Coords[] = [];
   @Input() editing = true;
+  @Input() active = false;
 
   @Output() removePoint = new EventEmitter<number>();
   @Output() initPointMove = new EventEmitter<PointMoveStart>();

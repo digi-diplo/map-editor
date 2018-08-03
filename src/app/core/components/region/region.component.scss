@@ -4,10 +4,13 @@
   @include mat-elevation-transition;
   @include mat-elevation(0);
   fill: rgba(128, 128, 128, 0.336);
-  stroke: blue;
-  stroke-dasharray: 2px 4px;
+  stroke: black;
   stroke-width: 0.55px;
-  animation: dash 8s linear infinite;
+  &.active {
+    stroke: blue;
+    stroke-dasharray: 2px 4px;
+    animation: dash 8s linear infinite;
+  }
 }
 
 .app-drag-circle {

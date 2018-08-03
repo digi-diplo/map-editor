@@ -32,7 +32,11 @@ interface Size {
         (wheel)="onWheel($event)"
         viewBox="0 0 500 250">
         <ng-template ngFor let-area [ngForOf]="areas$ | async">
-          <svg:g app-area [area]="area" (removePoint)="removePoint($event)" (initPointMove)="pointMoveStart($event)"/>
+          <svg:g app-area
+            [active]="area === (activeArea$ | async)"
+            [area]="area"
+            (removePoint)="removePoint($event)"
+            (initPointMove)="pointMoveStart($event)"/>
         </ng-template>
       </svg>
     </div>
