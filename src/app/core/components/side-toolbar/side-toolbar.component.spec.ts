@@ -1,7 +1,7 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { SideToolbarComponent } from './side-toolbar.component';
-import { MatIconModule, MatButtonModule } from '../../../../../node_modules/@angular/material';
+import { MatIconModule, MatButtonModule, MatSnackBarModule } from '../../../../../node_modules/@angular/material';
 
 describe('SideToolbarComponent', () => {
   let component: SideToolbarComponent;
@@ -10,7 +10,7 @@ describe('SideToolbarComponent', () => {
   beforeEach(async(() => {
     TestBed.configureTestingModule({
       declarations: [ SideToolbarComponent ],
-      imports: [MatIconModule, MatButtonModule]
+      imports: [MatIconModule, MatButtonModule, MatSnackBarModule]
     })
     .compileComponents();
   }));
