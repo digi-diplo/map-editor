@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { AreasService } from '../../state';
 
 @Component({
   selector: 'app-side-toolbar',
@@ -7,9 +8,17 @@ import { Component, OnInit } from '@angular/core';
 })
 export class SideToolbarComponent implements OnInit {
 
-  constructor() { }
+  constructor(
+    private areaService: AreasService
+  ) { }
 
   ngOnInit() {
+  }
+
+  addArea() {
+    // Set cursor
+    // Second click create new area
+    this.areaService.addDumyArea();
   }
 
 }
