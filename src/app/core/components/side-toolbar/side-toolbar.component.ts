@@ -3,7 +3,7 @@ import { MatSnackBar } from '@angular/material';
 
 import { Subscription } from 'rxjs';
 
-import { AreaService } from 'src/app/core/state';
+import { AreaService, EditorService } from 'src/app/core/state';
 
 @Component({
   selector: 'app-side-toolbar',
@@ -14,13 +14,12 @@ export class SideToolbarComponent implements OnDestroy {
   subscribtions: Subscription[] = [];
   constructor(
     private areaService: AreaService,
+    private editorService: EditorService,
     private snackBar: MatSnackBar
   ) { }
 
   addArea() {
-    // Set cursor
-    // Second click create new area
-    this.areaService.addDumyArea();
+    this.editorService.createNewArea();
   }
 
   resetState() {

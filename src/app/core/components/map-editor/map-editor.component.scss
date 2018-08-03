@@ -1,14 +1,18 @@
 @import '~@angular/material/theming';
 :host {
   display: grid;
-  grid-template-areas: "entity-toolbar entity-toolbar" "sidebar map";
+  grid-template-areas: "debug-info debug-info" "entity-toolbar entity-toolbar" "sidebar map";
   grid-template-columns: 48px auto;
-  grid-template-rows: 32px auto;
+  grid-template-rows: 32px 32px auto;
 }
 
 .app-map-container {
   overflow: hidden;
   grid-area: map;
+}
+
+.app-debug-info {
+  grid-area: debug-info;
 }
 
 .app-map {

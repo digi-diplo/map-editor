@@ -1,9 +1,10 @@
 <app-area-details-editor class="entity-toolbar" *ngIf="activeArea$ | async" [area]="activeArea$ | async"></app-area-details-editor>
+<app-debug-info class="app-debug-info"></app-debug-info>
 <app-side-toolbar class="sidebar"></app-side-toolbar>
 
 <div class="app-map-container">
-  <svg #map class="app-map" [ngClass]="{'crosshair': activeArea$ | async}" (click)="onClick($event)" (mousemove)="movePoint($event)" (mouseup)="pointMoveEnd($event)"
-    (wheel)="onWheel($event)" viewBox="0 0 500 250">
+  <svg #map class="app-map" [ngClass]="{'crosshair': activeArea$ | async}" (click)="addPoint($event)" (mousemove)="movePoint($event)"
+    (mouseup)="pointMoveEnd($event)" viewBox="0 0 500 250">
     <ng-template ngFor let-area [ngForOf]="areas$ | async">
       <svg:g app-area [active]="area === (activeArea$ | async)" [area]="area" (select)="selectArea(area.id)" (removePoint)="removePoint($event)"
         (initPointMove)="pointMoveStart($event)" />

@@ -3,7 +3,6 @@ import { remove, update, ID } from '@datorama/akita';
 
 
 import { Coords } from 'src/app/models';
-import { EditorQuery } from '../editor/editor.query';
 
 import { AreaStore } from './area.store';
 import { Area, createArea } from './area.model';
@@ -15,11 +14,8 @@ export class AreaService {
   cursorAddingPoints: boolean;
 
   constructor(
-    private areasStore: AreaStore,
-    editorQuery: EditorQuery
-  ) {
-    editorQuery.isAddingPoint().subscribe(b => this.cursorAddingPoints = b);
-  }
+    private areasStore: AreaStore
+  ) { }
 
   selectArea(areaID: ID) {
     this.areasStore.setActive(areaID);
@@ -44,16 +40,14 @@ export class AreaService {
   }
 
   addPointToActiveArea(point: Coords) {
-    if (this.cursorAddingPoints) {
-      console.log('Adding point');
-      this.areasStore.updateActive(area => ({
-        ...area,
-        boundaries: [
-          ...area.boundaries,
-          point
-        ]
-      }));
-    }
+    console.log('Adding point');
+    this.areasStore.updateActive(area => ({
+      ...area,
+      boundaries: [
+        ...area.boundaries,
+        point
+      ]
+    }));
   }
 
   removePointToActiveRegion(index: number) {

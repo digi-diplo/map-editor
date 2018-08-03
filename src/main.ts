@@ -14,7 +14,7 @@ if (environment.production) {
 }
 
 persistState({
-  exclude: ['cursor']
+  exclude: ['editor']
 });
 
 platformBrowserDynamic().bootstrapModule(AppModule)

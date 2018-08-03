@@ -13,9 +13,11 @@ import {
 
 import { AreaDetailsEditorComponent } from './components/area-details-editor/area-details-editor.component';
 import { SideToolbarComponent } from './components/side-toolbar/side-toolbar.component';
+import { DebugInfoComponent } from './components/debug-info/debug-info.component';
 import { MapEditorComponent } from './components/map-editor/map-editor.component';
 import { RegionComponent } from './components/region/region.component';
 import { AreaComponent } from './components/area/area.component';
+
 import { KeysPipe } from './pipes/keys.pipe';
 
 const matModules = [
@@ -38,8 +40,10 @@ const matModules = [
     AreaDetailsEditorComponent,
     SideToolbarComponent,
     MapEditorComponent,
+    DebugInfoComponent,
     RegionComponent,
     AreaComponent,
+
     KeysPipe,
   ],
   exports: [

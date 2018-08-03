@@ -7,6 +7,7 @@ import { AreaComponent } from '../area/area.component';
 import { RegionComponent } from '../region/region.component';
 import { SideToolbarComponent } from '../side-toolbar/side-toolbar.component';
 import { KeysPipe } from '../../pipes/keys.pipe';
+import { DebugInfoComponent } from '../debug-info/debug-info.component';
 
 describe('MapEditorComponent', () => {
   let component: MapEditorComponent;
@@ -14,10 +15,18 @@ describe('MapEditorComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ MapEditorComponent, AreaDetailsEditorComponent, AreaComponent, RegionComponent, SideToolbarComponent, KeysPipe ],
+      declarations: [
+        MapEditorComponent,
+        AreaDetailsEditorComponent,
+        AreaComponent,
+        DebugInfoComponent,
+        RegionComponent,
+        SideToolbarComponent,
+        KeysPipe
+      ],
       imports: [MatFormFieldModule, MatSelectModule, MatIconModule, MatSnackBarModule]
     })
-    .compileComponents();
+      .compileComponents();
   }));
 
   beforeEach(() => {

@@ -11,7 +11,7 @@ const initialState: EditorState = {
   providedIn: 'root'
 })
 @StoreConfig({
-  name: 'cursor'
+  name: 'editor'
 })
 export class EditorStore extends Store<EditorState> {
   constructor() {

@@ -11,7 +11,7 @@ import { PointMoveStart } from '../region/region.component';
     <svg:g app-region
       [active]="active"
       [points]="area.boundaries"
-      [ngClass]="{'pointer': cursorIsSelect}"
+      [ngClass]="{'pointer': isEditorSelecting}"
       (click)="emitSelect($event)"
       (removePoint)="removePoint.emit($event)"
       (initPointMove)="initPointMove.emit($event)"/>
@@ -28,21 +28,21 @@ import { PointMoveStart } from '../region/region.component';
 export class AreaComponent {
   @Input() area: Area;
   @Input() active = false;
+
   @Output() removePoint = new EventEmitter<number>();
   @Output() initPointMove = new EventEmitter<PointMoveStart>();
   @Output() select = new EventEmitter<void>();
 
-  cursorIsSelect = false;
+  isEditorSelecting = false;
+
   constructor(
-    private cursorQuery: EditorQuery
+    private editorQuery: EditorQuery
   ) {
-    this.cursorQuery.isSelecting().subscribe(b => this.cursorIsSelect = b);
+    this.editorQuery.isSelecting().subscribe(val => this.isEditorSelecting = val);
   }
 
   emitSelect(event: MouseEvent) {
-    if (this.cursorIsSelect) {
-      event.preventDefault();
-      this.select.emit();
-    }
+    event.stopPropagation();
+    this.select.emit();
   }
 }

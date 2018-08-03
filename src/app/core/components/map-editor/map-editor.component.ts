@@ -3,7 +3,7 @@ import { ID } from '@datorama/akita';
 
 import { Observable } from 'rxjs';
 
-import { Area, AreasQuery, AreaService, EditorService } from 'src/app/core/state';
+import { Area, AreasQuery, AreaService, EditorService, EditorAction } from 'src/app/core/state';
 import { distanceBetween, Coords } from 'src/app/models';
 
 import { PointMoveStart } from '../region/region.component';
@@ -27,6 +27,7 @@ export class MapEditorComponent {
   @ViewChild('map')
   map: ElementRef<SVGElement>;
 
+  // TODO: refactor to editor state
   movingPoint = false;
   movingConfirmed = false;
   pointMoveStartEvent: PointMoveStart;
@@ -34,22 +35,17 @@ export class MapEditorComponent {
   constructor(
     private areaQuery: AreasQuery,
     private areaService: AreaService,
-    private cursorService: EditorService
+    private editorService: EditorService
   ) { }
 
-  onClick(event: MouseEvent) {
-    this.areaService.addPointToActiveArea(
+  addPoint(event: MouseEvent) {
+    this.editorService.addPoint(
       this.getCoordsRelativeToMap({ x: event.clientX, y: event.clientY })
     );
   }
 
   selectArea(areaID: ID) {
-    this.areaService.selectArea(areaID);
-    this.cursorService.setAddingPoint();
-  }
-
-  clearState() {
-    this.areaService.resetState();
+    this.editorService.selectArea(areaID);
   }
 
   removePoint(index: number) {
@@ -62,6 +58,16 @@ export class MapEditorComponent {
     this.movingConfirmed = false;
   }
 
+  pointMoveEnd(event: MouseEvent) {
+    if (!this.movingPoint) { return; }
+
+    this.movePoint(event);
+    this.movingPoint = false;
+    this.movingConfirmed = false;
+    this.pointMoveStartEvent = null;
+    this.editorService.setAddingPoint();
+  }
+
   movePoint(event: MouseEvent) {
     if (!this.movingPoint) { return; }
     const newPos = this.getCoordsRelativeToMap({ x: event.clientX, y: event.clientY });
@@ -71,7 +77,7 @@ export class MapEditorComponent {
       const distance = Math.abs(distanceBetween(newPos, startPos));
       if (distance > 2) {
         this.movingConfirmed = true;
-        this.cursorService.setGrabbing();
+        this.editorService.setGrabbing();
       }
     } else {
       this.areaService.movePointFromActiveRegion(this.pointMoveStartEvent.pointIndex, newPos);
@@ -81,27 +87,9 @@ export class MapEditorComponent {
   @HostListener('document:keydown', ['$event'])
   handleKeyboardEvent(event: KeyboardEvent) {
     if (event.key === 'Escape') {
-      this.cursorService.setSelect();
+      this.editorService.setSelect();
       this.areaService.resetActive();
     }
-  }
-
-  pointMoveEnd(event: MouseEvent) {
-    if (!this.movingPoint) { return; }
-
-    this.movePoint(event);
-    this.movingPoint = false;
-    this.movingConfirmed = false;
-    this.pointMoveStartEvent = null;
-    this.cursorService.setAddingPoint();
-  }
-
-  addArea() {
-    this.areaService.addDumyArea();
-  }
-
-  onWheel(event: Event) {
-    console.log(event);
   }
 
   private getCoordsRelativeToMap(coords: Coords): Coords {
