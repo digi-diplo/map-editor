@@ -8,9 +8,7 @@ import { Area } from './area.model';
   providedIn: 'root'
 })
 export class AreasQuery extends QueryEntity<AreasState, Area> {
-
   constructor(protected store: AreasStore) {
     super(store);
   }
-
 }

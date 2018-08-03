@@ -15,6 +15,9 @@
 
 .app-drag-circle {
   cursor: grab;
+  &.grabbing {
+    cursor: grabbing;
+  }
 }
 
 @keyframes dash {

@@ -3,7 +3,7 @@ import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
 import { Observable } from 'rxjs';
 
 import { PointMoveStart } from '../region/region.component';
-import { Area, AreasQuery, AreasService } from '../../state';
+import { Area, AreasQuery, AreasService, CursorService } from '../../state';
 import { distanceBetween } from '../../../models/coords';
 
 interface Coords {
@@ -57,7 +57,8 @@ export class MapEditorComponent {
 
   constructor(
     private areaQuery: AreasQuery,
-    private areaService: AreasService
+    private areaService: AreasService,
+    private cursorService: CursorService
   ) { }
 
   onClick(event: MouseEvent) {
@@ -89,6 +90,7 @@ export class MapEditorComponent {
       const distance = Math.abs(distanceBetween(newPos, startPos));
       if (distance > 2) {
         this.movingConfirmed = true;
+        this.cursorService.setGrabbing();
       }
     } else {
       this.areaService.movePointFromActiveRegion(this.pointMoveStartEvent.pointIndex, newPos);
@@ -102,6 +104,7 @@ export class MapEditorComponent {
     this.movingPoint = false;
     this.movingConfirmed = false;
     this.pointMoveStartEvent = null;
+    this.cursorService.setAddingPoint();
   }
 
   addArea() {

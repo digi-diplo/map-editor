@@ -13,7 +13,9 @@ if (environment.production) {
   enableAkitaProdMode();
 }
 
-persistState();
+persistState({
+  exclude: ['cursor']
+});
 
 platformBrowserDynamic().bootstrapModule(AppModule)
   .catch(err => console.log(err));
