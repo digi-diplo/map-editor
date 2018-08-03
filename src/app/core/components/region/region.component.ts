@@ -13,20 +13,7 @@ export interface PointMoveStart {
 @Component({
   // tslint:disable-next-line:component-selector
   selector: '[app-region]',
-  template: `
-      <svg:polygon class="app-area" [ngClass]="{'active': active}" [attr.points]="svgPoints"/>
-      <ng-template *ngIf="editing" ngFor let-i="index" let-point [ngForOf]="points">
-        <svg:circle *ngIf="active"
-          [ngClass]="{'grabbing': (cursorGrabbing | async)}"
-          (mousedown)="initMove($event, i)"
-          (contextmenu)="deletePoint($event, i)"
-          class="app-drag-circle"
-          [attr.cx]="point.x"
-          [attr.cy]="point.y"
-          r="2"
-          fill="red"/>
-      </ng-template>
-	`,
+  templateUrl: './region.component.html',
   styleUrls: ['./region.component.scss']
 })
 export class RegionComponent {
@@ -37,10 +24,10 @@ export class RegionComponent {
   @Output() removePoint = new EventEmitter<number>();
   @Output() initPointMove = new EventEmitter<PointMoveStart>();
 
-  cursorGrabbing: Observable<boolean>;
+  movingPoint: Observable<boolean>;
 
   constructor(editorQuery: EditorQuery) {
-    this.cursorGrabbing = editorQuery.isGrabbing();
+    this.movingPoint = editorQuery.isMovingPoint();
   }
 
   get svgPoints(): string {

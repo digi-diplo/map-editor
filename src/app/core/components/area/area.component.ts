@@ -42,7 +42,10 @@ export class AreaComponent {
   }
 
   emitSelect(event: MouseEvent) {
-    event.stopPropagation();
-    this.select.emit();
+    // FIXME: How can we extract this logic from here ?
+    if (this.isEditorSelecting) {
+      event.stopPropagation();
+      this.select.emit();
+    }
   }
 }

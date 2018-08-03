@@ -1,2 +1,2 @@
-export * from './Coords';
-export * from './Region';
+export * from './coords';
+export * from './region';

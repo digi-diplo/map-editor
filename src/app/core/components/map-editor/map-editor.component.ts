@@ -3,7 +3,7 @@ import { ID } from '@datorama/akita';
 
 import { Observable } from 'rxjs';
 
-import { Area, AreasQuery, AreaService, EditorService, EditorAction } from 'src/app/core/state';
+import { Area, AreasQuery, AreaService, EditorService, EditorAction, EditorQuery } from 'src/app/core/state';
 import { distanceBetween, Coords } from 'src/app/models';
 
 import { PointMoveStart } from '../region/region.component';
@@ -27,6 +27,8 @@ export class MapEditorComponent {
   @ViewChild('map')
   map: ElementRef<SVGElement>;
 
+  isAddingPoint = false;
+
   // TODO: refactor to editor state
   movingPoint = false;
   movingConfirmed = false;
@@ -35,8 +37,11 @@ export class MapEditorComponent {
   constructor(
     private areaQuery: AreasQuery,
     private areaService: AreaService,
-    private editorService: EditorService
-  ) { }
+    private editorService: EditorService,
+    private editorQuery: EditorQuery
+  ) {
+    this.editorQuery.isAddingPoint().subscribe(v => this.isAddingPoint = v);
+  }
 
   addPoint(event: MouseEvent) {
     this.editorService.addPoint(
