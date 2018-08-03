@@ -7,7 +7,7 @@ import { Area } from './area.model';
 @Injectable({
   providedIn: 'root'
 })
-export class AreasQuery extends QueryEntity<AreaState, Area> {
+export class AreaQuery extends QueryEntity<AreaState, Area> {
   constructor(protected store: AreaStore) {
     super(store);
   }

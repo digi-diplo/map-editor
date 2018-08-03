@@ -3,7 +3,7 @@ import { ID } from '@datorama/akita';
 
 import { Observable } from 'rxjs';
 
-import { Area, AreasQuery, AreaService, EditorService, EditorAction, EditorQuery } from 'src/app/core/state';
+import { Area, AreaQuery, AreaService, EditorService, EditorAction, EditorQuery } from 'src/app/core/state';
 import { distanceBetween, Coords } from 'src/app/models';
 
 import { PointMoveStart } from '../region/region.component';
@@ -35,7 +35,7 @@ export class MapEditorComponent {
   pointMoveStartEvent: PointMoveStart;
 
   constructor(
-    private areaQuery: AreasQuery,
+    private areaQuery: AreaQuery,
     private areaService: AreaService,
     private editorService: EditorService,
     private editorQuery: EditorQuery
@@ -94,6 +94,12 @@ export class MapEditorComponent {
     if (event.key === 'Escape') {
       this.editorService.setSelect();
       this.areaService.resetActive();
+    } if (event.metaKey || event.ctrlKey) {
+      if (event.key === 'z') {
+        this.editorService.undo();
+      } else if (event.key === 'y') {
+        this.editorService.redo();
+      }
     }
   }
 

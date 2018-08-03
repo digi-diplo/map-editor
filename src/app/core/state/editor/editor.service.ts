@@ -1,23 +1,39 @@
 import { Injectable } from '@angular/core';
-import { ID } from '@datorama/akita';
+import { ID, StateHistoryPlugin } from '@datorama/akita';
 
 import { EditorStore } from './editor.store';
 import { EditorAction } from './editor.model';
 import { AreaService } from '../area/area.service';
 import { Coords } from '../../../models';
 import { EditorQuery } from './editor.query';
+import { AreaQuery } from '../area/area.query';
 
 @Injectable({
   providedIn: 'root'
 })
 export class EditorService {
   isAddingPoints = false;
+  history = new StateHistoryPlugin(this.areaQuery, { maxAge: 20 });
+  editorHistory = new StateHistoryPlugin(this.editoreQuery, { maxAge: 20 });
+
   constructor(
     private store: EditorStore,
     private editoreQuery: EditorQuery,
-    private areaService: AreaService
+    private areaService: AreaService,
+    private areaQuery: AreaQuery,
+    private editorQuery: EditorQuery
   ) {
     this.editoreQuery.isAddingPoint().subscribe(v => this.isAddingPoints = v);
+  }
+
+  undo() {
+    this.history.undo();
+    this.editorHistory.undo();
+  }
+
+  redo() {
+    this.history.redo();
+    this.editorHistory.redo();
   }
 
   createNewArea() {
