@@ -1,7 +1,8 @@
 import { Component, Input, Output, EventEmitter } from '@angular/core';
 
-import { PointMoveStart } from '../region/region.component';
 import { Area, EditorQuery } from 'src/app/core/state';
+
+import { PointMoveStart } from '../region/region.component';
 
 @Component({
   // tslint:disable-next-line:component-selector
@@ -35,7 +36,7 @@ export class AreaComponent {
   constructor(
     private cursorQuery: EditorQuery
   ) {
-    this.cursorQuery.selecting().subscribe(b => this.cursorIsSelect = b);
+    this.cursorQuery.isSelecting().subscribe(b => this.cursorIsSelect = b);
   }
 
   emitSelect(event: MouseEvent) {

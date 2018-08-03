@@ -1,10 +1,10 @@
 import { Injectable } from '@angular/core';
 import { StoreConfig, Store } from '@datorama/akita';
 
-import { EditorState, CursorActions } from './editor.model';
+import { EditorState, EditorAction } from './editor.model';
 
 const initialState: EditorState = {
-  state: CursorActions.Select
+  currentAction: EditorAction.SelectingArea
 };
 
 @Injectable({

@@ -1,4 +1,5 @@
 import { Component, Input, Output, EventEmitter } from '@angular/core';
+
 import { Observable } from 'rxjs';
 
 import { Coords } from 'src/app/models';
@@ -39,7 +40,7 @@ export class RegionComponent {
   cursorGrabbing: Observable<boolean>;
 
   constructor(editorQuery: EditorQuery) {
-    this.cursorGrabbing = editorQuery.grabbing();
+    this.cursorGrabbing = editorQuery.isGrabbing();
   }
 
   get svgPoints(): string {

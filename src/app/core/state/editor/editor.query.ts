@@ -3,7 +3,7 @@ import { Query } from '@datorama/akita';
 
 import { Observable } from 'rxjs';
 
-import { EditorState, CursorActions } from './editor.model';
+import { EditorState, EditorAction } from './editor.model';
 import { EditorStore } from './editor.store';
 
 @Injectable({
@@ -14,23 +14,23 @@ export class EditorQuery extends Query<EditorState> {
     super(store);
   }
 
-  addingPoints(): Observable<boolean> {
-    return this.isCursor(CursorActions.AddingPoint);
+  isAddingPoint(): Observable<boolean> {
+    return this.isAction(EditorAction.AddingPoint);
   }
 
-  grabbing(): Observable<boolean> {
-    return this.isCursor(CursorActions.Grabbing);
+  isGrabbing(): Observable<boolean> {
+    return this.isAction(EditorAction.GrabbingPoint);
   }
 
-  selecting(): Observable<boolean> {
-    return this.isCursor(CursorActions.Select);
+  isSelecting(): Observable<boolean> {
+    return this.isAction(EditorAction.SelectingArea);
   }
 
-  grab(): Observable<boolean> {
-    return this.isCursor(CursorActions.Grab);
+  isMovingPoint(): Observable<boolean> {
+    return this.isAction(EditorAction.MovingPoint);
   }
 
-  private isCursor(action: CursorActions): Observable<boolean> {
-    return this.select(state => state.state === action);
+  private isAction(action: EditorAction): Observable<boolean> {
+    return this.select(state => state.currentAction === action);
   }
 }

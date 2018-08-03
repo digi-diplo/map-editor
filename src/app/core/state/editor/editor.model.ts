@@ -1,10 +1,10 @@
-export enum CursorActions {
-  Select = 'Select',
-  Grab = 'Grab',
-  Grabbing = 'Grabbing',
+export enum EditorAction {
+  SelectingArea = 'SelectingArea',
+  GrabbingPoint = 'GrabbingPoint',
+  MovingPoint = 'MovingPoint',
   AddingPoint = 'AddingPoint'
 }
 
 export interface EditorState {
-  state: CursorActions;
+  currentAction: EditorAction;
 }

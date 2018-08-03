@@ -1,8 +1,9 @@
 import { Component, OnDestroy } from '@angular/core';
 import { MatSnackBar } from '@angular/material';
 
-import { AreasService } from 'src/app/core/state';
 import { Subscription } from 'rxjs';
+
+import { AreaService } from 'src/app/core/state';
 
 @Component({
   selector: 'app-side-toolbar',
@@ -12,7 +13,7 @@ import { Subscription } from 'rxjs';
 export class SideToolbarComponent implements OnDestroy {
   subscribtions: Subscription[] = [];
   constructor(
-    private areaService: AreasService,
+    private areaService: AreaService,
     private snackBar: MatSnackBar
   ) { }
 

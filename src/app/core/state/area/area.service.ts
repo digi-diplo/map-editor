@@ -5,20 +5,20 @@ import { remove, update, ID } from '@datorama/akita';
 import { Coords } from 'src/app/models';
 import { EditorQuery } from '../editor/editor.query';
 
-import { AreasStore } from './areas.store';
+import { AreaStore } from './area.store';
 import { Area, createArea } from './area.model';
 
 @Injectable({
   providedIn: 'root'
 })
-export class AreasService {
+export class AreaService {
   cursorAddingPoints: boolean;
 
   constructor(
-    private areasStore: AreasStore,
+    private areasStore: AreaStore,
     editorQuery: EditorQuery
   ) {
-    editorQuery.addingPoints().subscribe(b => this.cursorAddingPoints = b);
+    editorQuery.isAddingPoint().subscribe(b => this.cursorAddingPoints = b);
   }
 
   selectArea(areaID: ID) {

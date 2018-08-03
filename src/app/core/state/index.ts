@@ -1,6 +1,6 @@
-export * from './area/areas.query';
-export * from './area/areas.store';
-export * from './area/areas.service';
+export * from './area/area.query';
+export * from './area/area.store';
+export * from './area/area.service';
 export * from './area/area.model';
 
 export * from './editor/editor.model';

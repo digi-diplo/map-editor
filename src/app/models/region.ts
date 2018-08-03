@@ -1,4 +1,4 @@
-import { Coords } from './coords';
+import { Coords } from './Coords';
 
 export interface Region {
   points: Coords[];

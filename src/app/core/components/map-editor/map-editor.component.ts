@@ -3,9 +3,10 @@ import { ID } from '@datorama/akita';
 
 import { Observable } from 'rxjs';
 
-import { PointMoveStart } from '../region/region.component';
-import { Area, AreasQuery, AreasService, EditorService } from 'src/app/core/state';
+import { Area, AreasQuery, AreaService, EditorService } from 'src/app/core/state';
 import { distanceBetween, Coords } from 'src/app/models';
+
+import { PointMoveStart } from '../region/region.component';
 
 interface Size {
   height: number;
@@ -32,7 +33,7 @@ export class MapEditorComponent {
 
   constructor(
     private areaQuery: AreasQuery,
-    private areaService: AreasService,
+    private areaService: AreaService,
     private cursorService: EditorService
   ) { }
 
