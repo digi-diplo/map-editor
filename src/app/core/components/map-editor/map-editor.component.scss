@@ -7,9 +7,12 @@
 }
 
 .app-map-container {
-  @include mat-elevation(4);
   overflow: hidden;
   grid-area: map;
+}
+
+.app-map {
+  @include mat-elevation(4);
 }
 
 .entity-toolbar {

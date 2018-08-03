@@ -1,16 +1,11 @@
-import { Component, OnInit, ViewChild, ElementRef, HostListener } from '@angular/core';
+import { Component, ViewChild, ElementRef, HostListener } from '@angular/core';
 
 import { Observable } from 'rxjs';
 
 import { PointMoveStart } from '../region/region.component';
 import { Area, AreasQuery, AreasService, CursorService } from '../../state';
-import { distanceBetween } from '../../../models';
+import { distanceBetween, Coords } from 'src/app/models';
 import { ID } from '@datorama/akita';
-
-interface Coords {
-  x: number;
-  y: number;
-}
 
 interface Size {
   height: number;
@@ -19,27 +14,7 @@ interface Size {
 
 @Component({
   selector: 'app-map-editor',
-  template: `
-    <app-area-details-editor class="entity-toolbar" *ngIf="activeArea$ | async" [area]="activeArea$ | async"></app-area-details-editor>
-    <app-side-toolbar class="sidebar"></app-side-toolbar>
-    <div class="app-map-container">
-      <svg #map [ngClass]="{'crosshair': activeArea$ | async}"
-        (click)="onClick($event)"
-        (mousemove)="movePoint($event)"
-        (mouseup)="pointMoveEnd($event)"
-        (wheel)="onWheel($event)"
-        viewBox="0 0 500 250">
-        <ng-template ngFor let-area [ngForOf]="areas$ | async">
-        <svg:g app-area
-            [active]="area === (activeArea$ | async)"
-            [area]="area"
-            (select)="selectArea(area.id)"
-            (removePoint)="removePoint($event)"
-            (initPointMove)="pointMoveStart($event)"/>
-        </ng-template>
-      </svg>
-    </div>
-		`,
+  templateUrl: './map-editor.component.html',
   styleUrls: ['./map-editor.component.scss']
 })
 export class MapEditorComponent {
