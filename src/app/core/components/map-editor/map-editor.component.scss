@@ -1,14 +1,18 @@
 @import '~@angular/material/theming';
 :host {
   display: grid;
-  grid-template-areas: "debug-info debug-info" "entity-toolbar entity-toolbar" "sidebar map";
+  grid-template-areas: "sidebar entity-toolbar" "sidebar map" "sidebar debug-info";
   grid-template-columns: 48px auto;
-  grid-template-rows: 32px 32px auto;
+  grid-template-rows: min-content auto 32px;
 }
 
 .app-map-container {
   overflow: hidden;
+  margin: 8px;
   grid-area: map;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
 }
 
 .app-debug-info {
@@ -17,6 +21,8 @@
 
 .app-map {
   @include mat-elevation(4);
+  border: 1px solid #a4a2a266;
+  border-radius: 4px;
 }
 
 .entity-toolbar {

@@ -1,5 +1,12 @@
+@import '~@angular/material/theming';
+
 :host {
-  display: flex;
+  @include mat-elevation(2);
+  z-index: 1;
+  display: grid;
+  grid-template-columns: repeat(3, min-content);
+  grid-template-rows: 32px;
   align-items: center;
-  padding-left: 16px;
+  padding: 4px 16px;
+  grid-gap: 8px;
 }

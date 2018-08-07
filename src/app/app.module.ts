@@ -2,7 +2,7 @@ import { NgModule, Sanitizer, SecurityContext } from '@angular/core';
 import { BrowserModule, SafeResourceUrl, DomSanitizer } from '@angular/platform-browser';
 import { HttpClientModule } from '@angular/common/http';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { MatToolbarModule, MatIconModule, MatButtonModule, MatIconRegistry } from '@angular/material';
+import { MatToolbarModule, MatIconModule, MatButtonModule, MatIconRegistry, MatTooltipModule } from '@angular/material';
 
 import { AppComponent } from './app.component';
 import { CoreModule } from './core/core.module';
@@ -15,7 +15,8 @@ import { CoreModule } from './core/core.module';
     CoreModule,
     MatToolbarModule,
     MatIconModule,
-    MatButtonModule
+    MatButtonModule,
+    MatTooltipModule
   ],
   declarations: [
     AppComponent,

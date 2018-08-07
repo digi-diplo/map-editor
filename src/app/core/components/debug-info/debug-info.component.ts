@@ -4,7 +4,7 @@ import { EditorQuery, EditorAction } from '../../state';
 @Component({
   selector: 'app-debug-info',
   template: `
-	  Editor state: {{editorState}}
+	  <span>Editor state: {{editorState}}</span>
 	`,
   styleUrls: ['./debug-info.component.scss']
 })

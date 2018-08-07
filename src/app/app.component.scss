@@ -1,3 +1,5 @@
+@import '~@angular/material/theming';
+
 :host {
   display: grid;
   height: 100vh;
@@ -7,6 +9,8 @@
 }
 
 .app-top-toolbar {
+  @include mat-elevation(4);
+  z-index: 3;
   grid-area: app-top-toolbar;
   height: 56px;
 }

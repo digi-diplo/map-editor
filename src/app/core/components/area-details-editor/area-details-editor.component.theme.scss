@@ -7,5 +7,9 @@
 
   app-area-details-editor {
     background-color: mat-color($primary);
+
+    .name-input {
+      color: mat-color($foreground, text);
+    }
   }
 }
