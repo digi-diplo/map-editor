@@ -3,7 +3,7 @@ import { MatSnackBar } from '@angular/material';
 
 import { Subscription } from 'rxjs';
 
-import { AreaService, EditorService } from 'src/app/core/state';
+import { EditorService } from 'src/app/core/state';
 
 @Component({
   selector: 'app-side-toolbar',
@@ -13,7 +13,6 @@ import { AreaService, EditorService } from 'src/app/core/state';
 export class SideToolbarComponent implements OnDestroy {
   subscribtions: Subscription[] = [];
   constructor(
-    private areaService: AreaService,
     private editorService: EditorService,
     private snackBar: MatSnackBar
   ) { }
@@ -27,11 +26,16 @@ export class SideToolbarComponent implements OnDestroy {
       'CONFIRM',
       { duration: 3500, verticalPosition: 'top' }
     );
-    const sub = dialogRef.onAction().subscribe(() => this.editorService.clearMap());
+    const sub = dialogRef.onAction().subscribe(() => this.editorService.resetMap());
     this.subscribtions.push(sub);
+  }
+
+  useSelectTool() {
+    this.editorService.useSelectTool();
   }
 
   ngOnDestroy() {
     this.subscribtions.forEach(s => s.unsubscribe());
   }
+
 }

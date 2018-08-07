@@ -11,3 +11,11 @@
     <mat-option *ngFor="let type of areaTypes | keys" [value]="type.value">{{type.key}}</mat-option>
   </mat-select>
 </mat-form-field>
+<div class="last-button">
+  <button (click)="selectAddPointsTool()" mat-icon-button matTooltip="Add points">
+    <mat-icon>add</mat-icon>
+  </button>
+  <button (click)="deleteArea()" matTooltip="Delete current area" mat-icon-button>
+    <mat-icon>delete</mat-icon>
+  </button>
+</div>

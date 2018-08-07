@@ -4,9 +4,13 @@
   @include mat-elevation(2);
   z-index: 1;
   display: grid;
-  grid-template-columns: repeat(3, min-content);
+  grid-template-columns: repeat(3, min-content) auto;
   grid-template-rows: 32px;
   align-items: center;
   padding: 4px 16px;
   grid-gap: 8px;
+}
+
+.last-button {
+  margin-left: auto;
 }

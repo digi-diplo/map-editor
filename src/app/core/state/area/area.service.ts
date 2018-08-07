@@ -6,6 +6,7 @@ import { Coords, distanceBetween, distanceToSegment } from 'src/app/models';
 
 import { AreaStore } from './area.store';
 import { Area, createArea } from './area.model';
+import { AreaQuery } from './area.query';
 
 export interface Line {
   p1: Coords;
@@ -19,8 +20,13 @@ export class AreaService {
   cursorAddingPoints: boolean;
 
   constructor(
-    private areasStore: AreaStore
+    private areasStore: AreaStore,
+    private areaQuery: AreaQuery
   ) { }
+
+  deleteActiveArea(): any {
+    this.areasStore.remove(this.areaQuery.getActive().id);
+  }
 
   selectArea(areaID: ID) {
     this.areasStore.setActive(areaID);

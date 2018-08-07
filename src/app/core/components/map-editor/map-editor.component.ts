@@ -70,7 +70,7 @@ export class MapEditorComponent {
     this.movingPoint = false;
     this.movingConfirmed = false;
     this.pointMoveStartEvent = null;
-    this.editorService.setAddingPoint();
+    this.editorService.usePointAddTool();
   }
 
   movePoint(event: MouseEvent) {
@@ -82,7 +82,7 @@ export class MapEditorComponent {
       const distance = Math.abs(distanceBetween(newPos, startPos));
       if (distance > 2) {
         this.movingConfirmed = true;
-        this.editorService.setGrabbing();
+        this.editorService.useMovingTool();
       }
     } else {
       this.areaService.movePointFromActiveRegion(this.pointMoveStartEvent.pointIndex, newPos);
@@ -92,9 +92,11 @@ export class MapEditorComponent {
   @HostListener('document:keydown', ['$event'])
   handleKeyboardEvent(event: KeyboardEvent) {
     if (event.key === 'Escape') {
-      this.editorService.setSelect();
+      this.editorService.useSelectTool();
       this.areaService.resetActive();
-    } if (event.metaKey || event.ctrlKey) {
+    } else if (event.key === 'Delete') {
+      this.editorService.deleteActiveArea();
+    } else if (event.metaKey || event.ctrlKey) {
       if (event.key === 'z') {
         this.editorService.undo();
       } else if (event.key === 'y') {

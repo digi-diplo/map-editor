@@ -13,6 +13,7 @@ import { AreaQuery } from '../area/area.query';
 })
 export class EditorService {
   isAddingPoints = false;
+
   history = new StateHistoryPlugin(this.areaQuery, { maxAge: 20 });
   editorHistory = new StateHistoryPlugin(this.editorQuery, { maxAge: 20 });
 
@@ -25,7 +26,12 @@ export class EditorService {
     this.editorQuery.isAddingPoint().subscribe(v => this.isAddingPoints = v);
   }
 
-  clearMap() {
+  deleteActiveArea(): void {
+    this.areaService.deleteActiveArea();
+    this.setEditorTool(EditorAction.SelectingArea);
+  }
+
+  resetMap() {
     this.areaService.resetState();
     this.setEditorTool(EditorAction.SelectingArea);
   }
@@ -42,33 +48,30 @@ export class EditorService {
 
   createNewArea() {
     this.setEditorTool(EditorAction.AddingPoint);
-    console.log('lol');
     this.areaService.addDumyArea();
   }
 
   selectArea(areaID: ID) {
     this.areaService.selectArea(areaID);
-    this.setAddingPoint();
   }
 
-  setGrabbing() {
+  useMovingTool() {
     this.setEditorTool(EditorAction.MovingPoint);
   }
 
-  setGrab() {
+  useGrabTool() {
     this.setEditorTool(EditorAction.GrabbingPoint);
   }
 
-  setSelect() {
+  useSelectTool() {
     this.setEditorTool(EditorAction.SelectingArea);
   }
 
-  setAddingPoint() {
+  usePointAddTool() {
     this.setEditorTool(EditorAction.AddingPoint);
   }
 
-  // Celle la, elle marche quand elle veut
-  setEditorTool(action: EditorAction) {
+  private setEditorTool(action: EditorAction) {
     console.log(action);
     this.store.setState(state => ({ ...state, currentAction: action }));
   }

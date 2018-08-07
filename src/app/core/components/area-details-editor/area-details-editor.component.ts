@@ -1,6 +1,6 @@
 import { Component, Input } from '@angular/core';
 
-import { Area, TerrainType, AreaType } from 'src/app/core/state';
+import { Area, TerrainType, AreaType, EditorService } from 'src/app/core/state';
 
 @Component({
   selector: 'app-area-details-editor',
@@ -11,4 +11,18 @@ export class AreaDetailsEditorComponent {
   terrainTypes = TerrainType;
   areaTypes = AreaType;
   @Input() area: Area;
+
+  constructor(
+    private editorService: EditorService
+  ) {
+
+  }
+
+  deleteArea() {
+    this.editorService.deleteActiveArea();
+  }
+
+  selectAddPointsTool() {
+    this.editorService.usePointAddTool();
+  }
 }
