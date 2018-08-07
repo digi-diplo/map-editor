@@ -1,8 +1,8 @@
-import { NgModule } from '@angular/core';
-import { BrowserModule } from '@angular/platform-browser';
+import { NgModule, Sanitizer, SecurityContext } from '@angular/core';
+import { BrowserModule, SafeResourceUrl, DomSanitizer } from '@angular/platform-browser';
 import { HttpClientModule } from '@angular/common/http';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { MatToolbarModule } from '@angular/material';
+import { MatToolbarModule, MatIconModule, MatButtonModule, MatIconRegistry } from '@angular/material';
 
 import { AppComponent } from './app.component';
 import { CoreModule } from './core/core.module';
@@ -13,7 +13,9 @@ import { CoreModule } from './core/core.module';
     HttpClientModule,
     BrowserAnimationsModule,
     CoreModule,
-    MatToolbarModule
+    MatToolbarModule,
+    MatIconModule,
+    MatButtonModule
   ],
   declarations: [
     AppComponent,
@@ -21,4 +23,8 @@ import { CoreModule } from './core/core.module';
   providers: [],
   bootstrap: [AppComponent]
 })
-export class AppModule { }
+export class AppModule {
+  constructor(registry: MatIconRegistry, sanitizer: DomSanitizer) {
+    registry.addSvgIcon('github_mark', sanitizer.bypassSecurityTrustResourceUrl('../assets/github-mark.svg'));
+  }
+}

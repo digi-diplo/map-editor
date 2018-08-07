@@ -8,9 +8,15 @@
 
 .app-top-toolbar {
   grid-area: app-top-toolbar;
-  height: 32px;
-  font-weight: normal;
-  font-size: 16px;
+  height: 56px;
+}
+
+.github-icon {
+  margin-left: auto;
+  & mat-icon {
+    height: 32px;
+    width: 32px;
+  }
 }
 
 .app-map-editor {

@@ -27,7 +27,7 @@ export class SideToolbarComponent implements OnDestroy {
       'CONFIRM',
       { duration: 3500, verticalPosition: 'top' }
     );
-    const sub = dialogRef.onAction().subscribe(() => this.areaService.resetState());
+    const sub = dialogRef.onAction().subscribe(() => this.editorService.clearMap());
     this.subscribtions.push(sub);
   }
 

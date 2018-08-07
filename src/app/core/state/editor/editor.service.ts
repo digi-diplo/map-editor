@@ -14,16 +14,20 @@ import { AreaQuery } from '../area/area.query';
 export class EditorService {
   isAddingPoints = false;
   history = new StateHistoryPlugin(this.areaQuery, { maxAge: 20 });
-  editorHistory = new StateHistoryPlugin(this.editoreQuery, { maxAge: 20 });
+  editorHistory = new StateHistoryPlugin(this.editorQuery, { maxAge: 20 });
 
   constructor(
     private store: EditorStore,
-    private editoreQuery: EditorQuery,
+    private editorQuery: EditorQuery,
     private areaService: AreaService,
     private areaQuery: AreaQuery,
-    private editorQuery: EditorQuery
   ) {
-    this.editoreQuery.isAddingPoint().subscribe(v => this.isAddingPoints = v);
+    this.editorQuery.isAddingPoint().subscribe(v => this.isAddingPoints = v);
+  }
+
+  clearMap() {
+    this.areaService.resetState();
+    this.setEditorTool(EditorAction.SelectingArea);
   }
 
   undo() {
