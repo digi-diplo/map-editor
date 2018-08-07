@@ -68,7 +68,9 @@ export class EditorService {
   }
 
   usePointAddTool() {
-    this.setEditorTool(EditorAction.AddingPoint);
+    if (this.areaQuery.hasActiveEntity) {
+      this.setEditorTool(EditorAction.AddingPoint);
+    }
   }
 
   private setEditorTool(action: EditorAction) {

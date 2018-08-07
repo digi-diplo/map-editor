@@ -1,7 +1,6 @@
-import { Component, OnDestroy } from '@angular/core';
+import { Component } from '@angular/core';
 import { MatSnackBar } from '@angular/material';
 
-import { Subscription } from 'rxjs';
 
 import { EditorService } from 'src/app/core/state';
 
@@ -10,8 +9,7 @@ import { EditorService } from 'src/app/core/state';
   templateUrl: './side-toolbar.component.html',
   styleUrls: ['./side-toolbar.component.scss']
 })
-export class SideToolbarComponent implements OnDestroy {
-  subscribtions: Subscription[] = [];
+export class SideToolbarComponent {
   constructor(
     private editorService: EditorService,
     private snackBar: MatSnackBar
@@ -27,15 +25,9 @@ export class SideToolbarComponent implements OnDestroy {
       { duration: 3500, verticalPosition: 'top' }
     );
     const sub = dialogRef.onAction().subscribe(() => this.editorService.resetMap());
-    this.subscribtions.push(sub);
   }
 
   useSelectTool() {
     this.editorService.useSelectTool();
   }
-
-  ngOnDestroy() {
-    this.subscribtions.forEach(s => s.unsubscribe());
-  }
-
 }

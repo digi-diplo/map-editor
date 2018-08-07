@@ -91,11 +91,14 @@ export class MapEditorComponent {
 
   @HostListener('document:keydown', ['$event'])
   handleKeyboardEvent(event: KeyboardEvent) {
+    // TODO: move elsewherea
     if (event.key === 'Escape') {
       this.editorService.useSelectTool();
       this.areaService.resetActive();
     } else if (event.key === 'Delete') {
       this.editorService.deleteActiveArea();
+    } else if (event.key === 'a') {
+      this.editorService.usePointAddTool();
     } else if (event.metaKey || event.ctrlKey) {
       if (event.key === 'z') {
         this.editorService.undo();

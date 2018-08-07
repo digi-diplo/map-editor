@@ -3,7 +3,7 @@
   display: grid;
   grid-template-areas: "sidebar entity-toolbar" "sidebar map" "sidebar debug-info";
   grid-template-columns: 48px auto;
-  grid-template-rows: min-content auto 32px;
+  grid-template-rows: 40px auto 32px;
 }
 
 .app-map-container {
