@@ -2,4 +2,5 @@
 <ng-template *ngIf="editing" ngFor let-i="index" let-point [ngForOf]="points">
   <svg:circle *ngIf="active" class="app-drag-circle" [ngClass]="{'grabbing': movingPoint | async}" (mousedown)="initMove($event, i)"
     (contextmenu)="deletePoint($event, i)" [attr.cx]="point.x" [attr.cy]="point.y" r="2" fill="red" />
+  <svg:text class="region-text" [attr.x]="point.x" [attr.y]="point.y" *ngIf="active">{{i}}</svg:text>
 </ng-template>

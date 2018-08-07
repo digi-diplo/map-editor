@@ -20,6 +20,11 @@
   }
 }
 
+.region-text {
+  pointer-events: none;
+  font-size: 8px;
+}
+
 @keyframes dash {
   from {
     stroke-dashoffset: 100;
