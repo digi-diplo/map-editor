@@ -4,7 +4,8 @@ import { StoreConfig, Store } from '@datorama/akita';
 import { EditorState, EditorAction } from './editor.model';
 
 const initialState: EditorState = {
-  currentAction: EditorAction.SelectingArea
+  currentAction: EditorAction.SelectingArea,
+  debugMode: true
 };
 
 @Injectable({

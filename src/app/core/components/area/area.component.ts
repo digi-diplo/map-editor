@@ -4,6 +4,7 @@ import { Area, EditorQuery } from 'src/app/core/state';
 
 import { PointMoveStart } from '../region/region.component';
 import { Coords } from '../../../models';
+import { Observable } from 'rxjs';
 
 @Component({
   // tslint:disable-next-line:component-selector
@@ -12,11 +13,12 @@ import { Coords } from '../../../models';
     <svg:g app-region
       [active]="active"
       [points]="area.boundaries"
-      [ngClass]="{'pointer': isEditorSelecting}"
+      [ngClass]="{'pointer': isEditorSelecting && !active}"
       (click)="emitSelect($event)"
       (removePoint)="removePoint.emit($event)"
       (initPointMove)="initPointMove.emit($event)"/>
-    <svg:text class="debug-text" *ngIf="area.boundaries.length" [attr.x]="mean.x" [attr.y]="mean.y">{{area.id}}</svg:text>
+    <svg:text class="debug-text" *ngIf="area.boundaries.length && (debuggingActive | async)"
+      [attr.x]="mean.x" [attr.y]="mean.y">{{area.id}}</svg:text>
     <ng-template ngFor let-region [ngForOf]="area.regions">
       <svg:g app-region [points]="region.points" (removePoint)="removePoint.emit($event)" (initPointMove)="initPointMove.emit($event)"/>
     </ng-template>
@@ -40,6 +42,7 @@ export class AreaComponent {
   @Output() select = new EventEmitter<void>();
 
   isEditorSelecting = false;
+  debuggingActive: Observable<boolean>;
 
   get mean(): Coords {
     const coords = this.area.boundaries.reduce((acc, cur) => ({ x: acc.x + cur.x, y: acc.y + cur.y }));
@@ -54,6 +57,7 @@ export class AreaComponent {
     private editorQuery: EditorQuery
   ) {
     this.editorQuery.isSelecting().subscribe(val => this.isEditorSelecting = val);
+    this.debuggingActive = this.editorQuery.debuggingMode();
   }
 
   emitSelect(event: MouseEvent) {

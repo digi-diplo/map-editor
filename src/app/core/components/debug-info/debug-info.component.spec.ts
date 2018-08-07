@@ -1,4 +1,5 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { MatSlideToggleModule } from '@angular/material';
 
 import { DebugInfoComponent } from './debug-info.component';
 
@@ -8,7 +9,8 @@ describe('DebugInfoComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ DebugInfoComponent ]
+      declarations: [ DebugInfoComponent ],
+      imports: [MatSlideToggleModule]
     })
     .compileComponents();
   }));

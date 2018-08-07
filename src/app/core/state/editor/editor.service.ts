@@ -26,6 +26,13 @@ export class EditorService {
     this.editorQuery.isAddingPoint().subscribe(v => this.isAddingPoints = v);
   }
 
+  setDebugState(active: boolean) {
+    this.store.setState(state => ({
+      ...state,
+      debugMode: active
+    }));
+  }
+
   deleteActiveArea(): void {
     this.areaService.deleteActiveArea();
     this.setEditorTool(EditorAction.SelectingArea);

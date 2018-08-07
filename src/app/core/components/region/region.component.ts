@@ -25,9 +25,11 @@ export class RegionComponent {
   @Output() initPointMove = new EventEmitter<PointMoveStart>();
 
   movingPoint: Observable<boolean>;
+  debugMode: Observable<boolean>;
 
   constructor(editorQuery: EditorQuery) {
     this.movingPoint = editorQuery.isMovingPoint();
+    this.debugMode = editorQuery.debuggingMode();
   }
 
   get svgPoints(): string {

@@ -14,6 +14,10 @@ export class EditorQuery extends Query<EditorState> {
     super(store);
   }
 
+  debuggingMode(): Observable<boolean> {
+    return this.select(state => state.debugMode);
+  }
+
   isAddingPoint(): Observable<boolean> {
     return this.isAction(EditorAction.AddingPoint);
   }

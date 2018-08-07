@@ -1,12 +1,13 @@
 @import '~@angular/material/theming';
-
 @mixin debug-info-theme($theme) {
   $primary: map-get($theme, primary);
   $accent: map-get($theme, accent);
   $foreground: map-get($theme, foreground);
-
   app-debug-info {
     background-color: mat-color($accent);
     color: mat-color($foreground, text);
+    .mat-slide-toggle-ripple {
+      height: 0;
+    }
   }
 }

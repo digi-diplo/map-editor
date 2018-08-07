@@ -8,7 +8,8 @@ import {
   MatFormFieldModule,
   MatInputModule,
   MatSelectModule,
-  MatSnackBarModule
+  MatSnackBarModule,
+  MatSlideToggleModule
 } from '@angular/material';
 
 import { AreaDetailsEditorComponent } from './components/area-details-editor/area-details-editor.component';
@@ -28,7 +29,8 @@ const matModules = [
   MatFormFieldModule,
   MatInputModule,
   MatSelectModule,
-  MatSnackBarModule
+  MatSnackBarModule,
+  MatSlideToggleModule
 ];
 
 @NgModule({

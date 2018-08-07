@@ -7,4 +7,5 @@ export enum EditorAction {
 
 export interface EditorState {
   currentAction: EditorAction;
+  debugMode: boolean;
 }
