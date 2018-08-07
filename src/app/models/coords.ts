@@ -19,19 +19,21 @@ export function distanceToSegment(p: Coords, segment: Line): number {
   return Math.sqrt(distToSegmentSquared(p, segment.p1, segment.p2));
 }
 
-function square(x: number) {
+function square(x: number): number {
   return x * x;
 }
 
-function distanceSquared(v: Coords, w: Coords) {
+function distanceSquared(v: Coords, w: Coords): number {
   return square(v.x - w.x) + square(v.y - w.y);
 }
 
 function distToSegmentSquared(p: Coords, v: Coords, w: Coords): number {
   const l2 = distanceSquared(v, w);
+
   if (l2 === 0) {
     return distanceSquared(p, v);
   }
+
   let t = ((p.x - v.x) * (w.x - v.x) + (p.y - v.y) * (w.y - v.y)) / l2;
   t = Math.max(0, Math.min(1, t));
 

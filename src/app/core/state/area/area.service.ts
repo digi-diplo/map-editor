@@ -47,22 +47,24 @@ export class AreaService {
   addPointToActiveArea(point: Coords) {
     console.log('Adding point');
 
-    this.areasStore.updateActive(area => {
-      const closestPointIndex = this.findInsertIndex(point, area.boundaries);
-      return {
-        ...area,
-        boundaries: [
-          ...splice(area.boundaries, closestPointIndex, 0, point)
-        ]
-      };
-    });
+    this.areasStore.updateActive(area => ({
+      ...area,
+      boundaries: [
+        ...splice(
+          area.boundaries,
+          this.findInsertIndex(point, area.boundaries),
+          0,
+          point
+        )
+      ]
+    }));
   }
 
-  /** Returns the index of the closest point. */
+  /** Returns the index corresponding to the two points forming the closest segment. */
   private findInsertIndex(point: Coords, points: Coords[]): number {
     let insertIndex = 0;
     let distanceToLine = Infinity;
-
+    // Iterate over all couple of following points
     for (let i = 0; i < points.length; i++) {
       const p1 = points[i];
       const secIndex = i + 1 < points.length ? i + 1 : 0;
@@ -76,11 +78,6 @@ export class AreaService {
     }
     return insertIndex;
   }
-
-  // private distanceToLine(point: Coords, line: Line): number {
-  //   return Math.abs((line.p2.y - line.p1.y) * point.x - (line.p2.x - line.p1.x) * point.y + line.p2.x * line.p1.y - line.p2.y * line.p1.x)
-  //     / Math.sqrt(Math.pow(line.p2.y - line.p1.y, 2) + Math.pow(line.p2.x - line.p1.x, 2));
-  // }
 
   removePointToActiveRegion(index: number) {
     console.log('Removing point');
