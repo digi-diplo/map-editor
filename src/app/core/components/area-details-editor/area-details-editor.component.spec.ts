@@ -11,7 +11,7 @@ describe('AreaDetailsEditorComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ AreaDetailsEditorComponent, KeysPipe ],
+      declarations: [AreaDetailsEditorComponent, KeysPipe],
       imports: [
         BrowserAnimationsModule,
         MatFormFieldModule,
@@ -20,7 +20,7 @@ describe('AreaDetailsEditorComponent', () => {
         MatIconModule
       ]
     })
-    .compileComponents();
+      .compileComponents();
   }));
 
   beforeEach(() => {
