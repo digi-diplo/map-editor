@@ -26,7 +26,7 @@ import { CoreModule } from './core/core.module';
 })
 export class AppModule {
   constructor(registry: MatIconRegistry, sanitizer: DomSanitizer) {
-    registry.addSvgIcon('github_mark', sanitizer.bypassSecurityTrustResourceUrl('../assets/github-mark.svg'));
-    registry.addSvgIcon('cursor_select', sanitizer.bypassSecurityTrustResourceUrl('../assets/mouse-pointer-solid.svg'));
+    registry.addSvgIcon('github_mark', sanitizer.bypassSecurityTrustResourceUrl('assets/github-mark.svg'));
+    registry.addSvgIcon('cursor_select', sanitizer.bypassSecurityTrustResourceUrl('assets/mouse-pointer-solid.svg'));
   }
 }
