@@ -1,5 +1,5 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
-import { MatFormFieldModule, MatSelectModule, MatIconModule, MatSnackBarModule } from '@angular/material';
+import { MatFormFieldModule, MatSelectModule, MatIconModule, MatSnackBarModule, MatSlideToggleModule } from '@angular/material';
 
 import { MapEditorComponent } from './map-editor.component';
 import { AreaDetailsEditorComponent } from '../area-details-editor/area-details-editor.component';
@@ -24,7 +24,7 @@ describe('MapEditorComponent', () => {
         SideToolbarComponent,
         KeysPipe
       ],
-      imports: [MatFormFieldModule, MatSelectModule, MatIconModule, MatSnackBarModule]
+      imports: [MatFormFieldModule, MatSelectModule, MatIconModule, MatSnackBarModule, MatSlideToggleModule]
     })
       .compileComponents();
   }));

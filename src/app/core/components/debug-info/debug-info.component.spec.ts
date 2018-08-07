@@ -9,10 +9,10 @@ describe('DebugInfoComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ DebugInfoComponent ],
+      declarations: [DebugInfoComponent],
       imports: [MatSlideToggleModule]
     })
-    .compileComponents();
+      .compileComponents();
   }));
 
   beforeEach(() => {
